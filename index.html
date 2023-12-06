@@ -1,0 +1,963 @@
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>AnimateZero</title>
+<link href="./style.css" rel="stylesheet">
+
+
+<style>
+  p.serif{
+    font-family:"Times New Roman", Times, serif;
+  }
+  p.sansserif{
+    font-family: Arial, Helvetica, sans-serif;
+  }
+</style>
+  
+</head>
+
+<body>
+<div class="content">
+  <h1><strong>AnimateZero: <br> Video Diffusion Models are Zero-Shot Image Animators</strong></h1>
+
+  <p id="authors" class="serif">
+    <a href="https://vvictoryuki.github.io/website/" style="margin-left: 3px; margin-right: 3px;">Jiwen Yu<sup>1</sup></a>
+    <a href="https://vinthony.github.io/academic/" style="margin-left: 3px; margin-right: 3px;">Xiaodong Cun<sup>2*</sup></a>
+    <a href="https://chenyangqiqi.github.io/" style="margin-left: 3px; margin-right: 3px;">Chenyang Qi<sup>3</sup></a>
+    <a href="https://yzhang2016.github.io/" style="margin-left: 3px; margin-right: 3px;">Yong Zhang<sup>2</sup></a>
+    <a href="https://xinntao.github.io/" style="margin-left: 3px; margin-right: 3px;">Xintao Wang<sup>2</sup></a>
+    <a href="https://scholar.google.com/citations?hl=zh-CN&user=4oXBp9UAAAAJ" style="margin-left: 3px; margin-right: 3px;">Ying Shan<sup>2</sup></a>
+    <a href="https://jianzhang.tech/" style="margin-left: 3px; margin-right: 3px;">Jian Zhang<sup>1*</sup></a>
+    <br>
+    <a style="font-size: 0.7em"><sup>*</sup>Corresponding Author.</a>
+    <br>
+    <span style="font-size: 0.8em; margin-top: 0.5em">
+      <a><sup>1</sup>Peking University</a>
+      <a><sup>2</sup>Tencent AI Lab</a>
+      <a><sup>3</sup>HKUST</a>
+    </span>
+  </p>
+
+  <font size="+1">
+    <p style="text-align: center;" class="serif">
+      <a href="https://arxiv.org/abs/?" target="_blank" style="font-weight: bold;">[Arxiv (coming soon)]</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="https://github.com/vvictoryuki/AnimateZero" target="_blank" style="font-weight: bold;">[Github]</a>
+  </font>
+
+  <!-- <font size="+1">
+    <p>Following are the generated videos in our teaser.</p>
+  </font> -->
+
+  <div class="row">
+    <div class="col">
+      <div class="centered-content">
+        <p>Generated Image</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Output Video</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Generated Image</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Output Video</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Generated Image</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Output Video</p>
+      </div>
+    </div>
+    
+    <div class="col">
+      <img src="animations/teaser/images/1.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/teaser/videos/1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/teaser/images/2.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/teaser/videos/2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/teaser/images/3.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/teaser/videos/3.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="col">
+      <img src="animations/teaser/images/129.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/teaser/videos/129.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/teaser/images/6.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/teaser/videos/6.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/teaser/images/141.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/teaser/videos/141.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="col">
+      <img src="animations/teaser/images/7.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/teaser/videos/7.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/teaser/images/10.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/teaser/videos/10.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/teaser/images/153.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/teaser/videos/153.mp4" type="video/mp4">
+      </video>
+    </div>
+
+  </div>
+
+
+</div>
+
+<div class="content">
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Gallery</p>
+
+  <font size="+1">
+    <p>Below, we showcase the videos generated by AnimateZero on a variety of personalized T2I models.</p>
+  </font>
+    
+  <div class="row">
+
+    <div class="col">
+      <img src="animations/gallery/images/1.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/gallery/images/2.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/gallery/images/5.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/5.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="serif" style="font-size: 1.2em; text-align: left; margin: 5px; margin-bottom: 20px">Model: <a href="https://civitai.com/models/30240">ToonYou</a></p>
+
+    <div class="col-gallery">
+      <img src="animations/gallery/images/7.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col-gallery">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/7.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col-gallery">
+      <img src="animations/gallery/images/8.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col-gallery">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/8.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="col-gallery">
+      <img src="animations/gallery/images/9.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col-gallery">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/9.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col-gallery">
+      <img src="animations/gallery/images/10.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col-gallery">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/10.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="serif" style="font-size: 1.2em; text-align: left; margin: 5px; margin-bottom: 20px">Model: <a href="https://civitai.com/models/25399">CarDos Anime</a></p>
+
+    <div class="col">
+      <img src="animations/gallery/images/11.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/11.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/gallery/images/12.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/12.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/gallery/images/13.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/13.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="serif" style="font-size: 1.2em; text-align: left; margin: 5px; margin-bottom: 20px">Model: <a href="https://civitai.com/models/9409">Anything V5</a></p>
+
+    <div class="col">
+      <img src="animations/gallery/images/14.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/14.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/gallery/images/15.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/15.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/gallery/images/16.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/16.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="serif" style="font-size: 1.2em; text-align: left; margin: 5px; margin-bottom: 20px">Model: <a href="https://civitai.com/models/4468">Counterfeit V3.0</a></p>
+
+    <div class="col">
+      <img src="animations/gallery/images/17.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/17.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/gallery/images/18.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/18.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/gallery/images/19.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/19.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="col-gallery">
+      <img src="animations/gallery/images/20.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col-gallery">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/20.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col-gallery">
+      <img src="animations/gallery/images/21.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col-gallery">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/21.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="serif" style="font-size: 1.2em; text-align: left; margin: 5px; margin-bottom: 20px">Model: <a href="https://civitai.com/models/4201">Realistic Vision V5.1</a></p>
+
+    <div class="col">
+      <img src="animations/gallery/images/22.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/22.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/gallery/images/23.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/23.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/gallery/images/24.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/24.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="serif" style="font-size: 1.2em; text-align: left; margin: 5px; margin-bottom: 20px">Model: <a href="https://civitai.com/models/84728">Photon</a></p>
+
+    <div class="col">
+      <img src="animations/gallery/images/25.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/25.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/gallery/images/26.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/26.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/gallery/images/27.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/videos/27.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="serif" style="font-size: 1.2em; text-align: left; margin: 5px; margin-bottom: 20px">Model: <a href="https://civitai.com/models/121716">helloObject</a></p>
+
+    <font size="+1">
+      <p>We also demonstrate an approach to control the motion of generated videos using text. 
+        In the following examples, we control the final state of the video by interpolating the text embeddings, thus achieving text-controlled motion.</p>
+    </font>
+
+    <div class="col">
+      <div class="centered-content">
+        <p>Generated Image</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Output Video</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>+ "happy and smile"</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>+ "angry and serious"</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>+ "open mouth"</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>+ "very sad"</p>
+      </div>
+    </div>
+
+    <div class="col">
+      <img src="animations/gallery/text_control_motion/1.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/text_control_motion/1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/text_control_motion/2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/text_control_motion/3.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/text_control_motion/4.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/gallery/text_control_motion/5.mp4" type="video/mp4">
+      </video>
+    </div>
+
+  </div>
+  </p>
+
+</div>
+
+<div class="content">
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Application: Video Editing</p>
+
+  <font size="+1">
+    <p>AnimateZero can also be used for better video editing, both for generated videos and real videos. 
+      One common use of AnimateDiff (AD) is to assist ControlNet (CN) in video editing, but it still has a domain gap problem. 
+      AnimateZero (AZ) has obvious advantages in this regard, namely generating videos with higher subjective quality and higher matching degree with the given text prompt.</p>
+  </font>
+
+  <div class="row">
+    <div class="col">
+      <div class="centered-content">
+        <p>Original Video</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>CN+AD</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>CN+AZ (ours)</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Original Video</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>CN+AD</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>CN+AZ (ours)</p>
+      </div>
+    </div>
+    
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/1-1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/1-2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/1-3.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/2-1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/2-2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/2-3.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="col-half">
+      <div class="centered-content">
+        <p>"A girl swimming in lava"</p>
+      </div>
+    </div>
+    <div class="col-half">
+      <div class="centered-content">
+        <p>"A girl is running in the forest, grassland"</p>
+      </div>
+    </div>
+
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/3-1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/3-2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/3-3.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/4-1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/4-2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/4-3.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="col-half">
+      <div class="centered-content">
+        <p>"A candle is burning purple flames by the seaside"</p>
+      </div>
+    </div>
+    <div class="col-half">
+      <div class="centered-content">
+        <p>"cute cat, colorful fur"</p>
+      </div>
+    </div>
+
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/9-1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/9-2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/9-3.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/10-1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/10-2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/10-3.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="col-half">
+      <div class="centered-content">
+        <p>"A girl is dancing"</p>
+      </div>
+    </div>
+    <div class="col-half">
+      <div class="centered-content">
+        <p>"a driving red car"</p>
+      </div>
+    </div>
+
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/7-1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/7-2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/7-3.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/8-1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/8-2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/video_editing/videos/8-3.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="col-half">
+      <div class="centered-content">
+        <p>"A woman with red glasses"</p>
+      </div>
+    </div>
+    <div class="col-half">
+      <div class="centered-content">
+        <p>"A young woman"</p>
+      </div>
+    </div>
+
+  </div>
+  <!-- <p class="serif" style="font-size: 1.2em; text-align: left; margin: 5px; margin-bottom: 20px">Model: <a href="https://civitai.com/models/30240/toonyou">ToonYou</a></p> -->
+
+  </p>
+
+</div>
+
+<div class="content">
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Application: Frame Interpolation</p>
+
+  <font size="+1">
+    <p>Extending the technology proposed by AnimateZero can simultaneously insert the first and last frames generated, realizing gradual transitions between the two frames, i.e., frame interpolation.</p>
+  </font>
+
+  <div class="row">
+    <div class="col">
+      <div class="centered-content">
+        <p>First Frame</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Last Frame</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Output Video</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>First Frame</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Last Frame</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Output Video</p>
+      </div>
+    </div>
+    
+    <div class="col">
+      <img src="animations/application/frame_interpolation/images/1-1.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="animations/application/frame_interpolation/images/1-2.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/frame_interpolation/videos/1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/application/frame_interpolation/images/2-1.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="animations/application/frame_interpolation/images/2-2.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/frame_interpolation/videos/2.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="col">
+      <img src="animations/application/frame_interpolation/images/3-1.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="animations/application/frame_interpolation/images/3-2.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/frame_interpolation/videos/3.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/application/frame_interpolation/images/4-1.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="animations/application/frame_interpolation/images/4-2.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/frame_interpolation/videos/4.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  <!-- <p class="serif" style="font-size: 1.2em; text-align: left; margin: 5px; margin-bottom: 20px">Model: <a href="https://civitai.com/models/30240/toonyou">ToonYou</a></p> -->
+
+  </p>
+
+</div>
+
+<div class="content">
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Application: Looped Video Generation</p>
+
+  <font size="+1">
+    <p>Looped video generation is a special case of frame interpolation, when the first frame and the last frame inserted are the same.
+    </p>
+  </font>
+
+  <div class="row">
+    <div class="col">
+      <div class="centered-content">
+        <p>Generated Image</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Output Video</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Generated Image</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Output Video</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Generated Image</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Output Video</p>
+      </div>
+    </div>
+    
+    <div class="col">
+      <img src="animations/application/looped_video_generation/images/1.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/looped_video_generation/videos/1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/application/looped_video_generation/images/2.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/looped_video_generation/videos/2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/application/looped_video_generation/images/3.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/looped_video_generation/videos/3.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="col">
+      <img src="animations/application/looped_video_generation/images/4.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/looped_video_generation/videos/4.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/application/looped_video_generation/images/5.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/looped_video_generation/videos/5.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/application/looped_video_generation/images/6.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/looped_video_generation/videos/6.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  <!-- <p class="serif" style="font-size: 1.2em; text-align: left; margin: 5px; margin-bottom: 20px">Model: <a href="https://civitai.com/models/30240/toonyou">ToonYou</a></p> -->
+
+  </p>
+
+</div>
+
+<div class="content">
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Application: Real Image Animation</p>
+
+  <font size="+1">
+    <p>AnimateZero has the potential to do real image animation, although the domain gap problem still exists, which is limited by the domain of the T2I model used.
+    </p>
+  </font>
+
+  <div class="row">
+    <div class="col">
+      <div class="centered-content">
+        <p>Real Image</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Output Video</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Real Image</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Output Video</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Real Image</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="centered-content">
+        <p>Output Video</p>
+      </div>
+    </div>
+    
+    <div class="col">
+      <img src="animations/application/real_image_animation/1.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/real_image_animation/1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/application/real_image_animation/2.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/real_image_animation/2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/application/real_image_animation/3.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/real_image_animation/3.mp4" type="video/mp4">
+      </video>
+    </div>
+
+  </div>
+  <!-- <p class="serif" style="font-size: 1.2em; text-align: left; margin: 5px; margin-bottom: 20px">Model: <a href="https://civitai.com/models/30240/toonyou">ToonYou</a></p> -->
+
+  </p>
+
+</div>
+
+<div class="content" id="bibtex">
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">BibTeX</p>
+  <span class="serif" style="color:red;"> (Coming Soon)</span>
+  <!-- <code> @misc{guo2023animatediff,<br>
+  &nbsp;&nbsp;title={AnimateDiff: Animate Your Personalized Text-to-Image Diffusion Models without Specific Tuning},<br>
+  &nbsp;&nbsp;author={Yuwei Guo, Ceyuan Yang, Anyi Rao, Yaohui Wang, Yu Qiao, Dahua Lin, Bo Dai},<br>
+  &nbsp;&nbsp;booktitle={arXiv preprint arxiv:2307.04725},<br>
+  &nbsp;&nbsp;year={2023},<br>
+  &nbsp;&nbsp;archivePrefix={arXiv},<br>
+  &nbsp;&nbsp;primaryClass={cs.CV}<br>
+  } </code>  -->
+</div>
+
+<div class="content">
+  <p class="serif">
+    Project page template is borrowed from <a href="https://animatediff.github.io/">AnimateDiff</a>.
+  </p>
+</div>
+
+
+<script>
+var videos = document.getElementsByClassName("clickplay");
+for (var i = 0; i < videos.length; i++) {
+  videos[i].addEventListener("click", function() {
+    this.play();
+  });
+  videos[i].addEventListener("ended", function() {
+    this.pause();
+    this.currentTime = 0;
+  });
+}
+</script>
+
+
+</body></html>
