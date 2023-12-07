@@ -163,17 +163,21 @@
 <div class="content">
   <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Our Unique Insights and Proposed Zero-Shot Methodology</p>
   <p style="font-size: 1.2em" class="serif">
-    Video diffusion models (VDMs) have made significant progress in the past year. 
-    However, obtaining satisfactory videos using VDMs still requires frequent trial and error, which <strong><em>consumes a large amount of computational resources and time</em></strong>, making it highly inefficient. 
-    To address this issue, we propose a <span style="color:red">step-by-step video generation framework</span> that first generates images (<strong>Step1</strong>) and then generates videos from the images (<strong>Step2</strong>). 
-    Since image generation is an efficient and highly controllable process, this approach greatly improves the controllability and efficiency of video generation. 
-    <br><br>
-    In addition, as a key technology module for step-by-step video generation, image-to-video has recently become a highly focused task with numerous related works emerging. However, almost all of these works <strong><em>require specific training</em></strong>. 
-    Our unique insight is that we believe the gap between T2V and I2V tasks is small, and satisfactory I2V performance can be achieved through zero-shot modifications on pre-trained T2V models. 
-    By introducing spatial appearance control and temporal consistency control, <span style="color:red">we demonstrate for the first time the potential of VDMs for zero-shot image-to-video generation</span>. 
-    This approach will also inspire the architectural design of subsequent training-based I2V works.
-  </p>
-  <img class="summary-img" src="./i2v-architecture.png" style="width:100%;"> <br>
+    <p><strong>Vanilla Video Diffusion Models (VDMs)</strong> have the following issues demonstrated in <strong>(a)</strong> of the following figure:</p>
+    <ul>
+      <li><span style="color:red">Black box</span>: The generation process is still a black box</li>
+      <li><span style="color:red">Inefficient and uncontrollabe</span>: to obtain satisfactory results, a large amount of trial and error is needed</li>
+      <li><span style="color:red">Domain gap</span>: limited by the domain of the video dataset used during training</li>
+    </ul>
+      </p>
+      <p>We propose <strong>step-by-step video generation pipeline</strong> to address the above issues demonstrated in <strong>(b)</strong> of the following figure:</p>
+      <ul>
+        <li><span style="color:red">Decoupling</span>: the video generation process is decoupled into appearance (T2I) and motion (I2V)</li>
+        <li><span style="color:red">Efficient and controllable</span>: T2I generation is more controllable and efficient compared to T2V, allowing us to obtain satisfactory images before performing I2V to generate videos</li>
+        <li><span style="color:red">Mitigating domain gap issues</span>: the domain of T2I models can be fine-tuned to align with the actual domain, which is more efficient than tuning the entire video model</li>
+      </ul>
+      <p>Moreover, we discovered that with just <strong>zero-shot</strong> modifications, we can transform pre-trained T2V models into I2V models, which means that <strong><span style="color:rgb(255, 179, 0)">Video Diffusion Models are Zero-Shot Image Animators</span></strong>!</p>
+  <img class="summary-img" src="./i2v-architecture-simple.png" style="width:65%;"> <br>
 </div>
 
 <div class="content">
@@ -765,6 +769,29 @@
     <div class="col">
       <video class="clickplay" width="100%" autoplay loop muted>
         <source src="animations/application/frame_interpolation/videos/4.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="col">
+      <img src="animations/application/frame_interpolation/images/5-1.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="animations/application/frame_interpolation/images/5-2.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/frame_interpolation/videos/5.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <img src="animations/application/frame_interpolation/images/6-1.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="animations/application/frame_interpolation/images/6-2.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <video class="clickplay" width="100%" autoplay loop muted>
+        <source src="animations/application/frame_interpolation/videos/6.mp4" type="video/mp4">
       </video>
     </div>
   </div>
