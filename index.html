@@ -161,6 +161,22 @@
 </div>
 
 <div class="content">
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Our Unique Insights and Proposed Zero-Shot Methodology</p>
+  <p style="font-size: 1.2em" class="serif">
+    Video diffusion models (VDMs) have made significant progress in the past year. 
+    However, obtaining satisfactory videos using VDMs still requires frequent trial and error, which <strong><em>consumes a large amount of computational resources and time</em></strong>, making it highly inefficient. 
+    To address this issue, we propose a <span style="color:red">step-by-step video generation framework</span> that first generates images (<strong>Step1</strong>) and then generates videos from the images (<strong>Step2</strong>). 
+    Since image generation is an efficient and highly controllable process, this approach greatly improves the controllability and efficiency of video generation. 
+    <br><br>
+    In addition, as a key technology module for step-by-step video generation, image-to-video has recently become a highly focused task with numerous related works emerging. However, almost all of these works <strong><em>require specific training</em></strong>. 
+    Our unique insight is that we believe the gap between T2V and I2V tasks is small, and satisfactory I2V performance can be achieved through zero-shot modifications on pre-trained T2V models. 
+    By introducing spatial appearance control and temporal consistency control, <span style="color:red">we demonstrate for the first time the potential of VDMs for zero-shot image-to-video generation</span>. 
+    This approach will also inspire the architectural design of subsequent training-based I2V works.
+  </p>
+  <img class="summary-img" src="./i2v-architecture.png" style="width:100%;"> <br>
+</div>
+
+<div class="content">
   <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Gallery</p>
 
   <font size="+1">
